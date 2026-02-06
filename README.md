@@ -33,7 +33,7 @@
 ### How to Play
 
 1. **Download** or clone this repository
-2. **Open** `finance.html` in your web browser
+2. **Open** `index.html` in your web browser
 3. **Enter** your operator name and select difficulty
 4. **Start** managing your cyberpunk finances!
 
