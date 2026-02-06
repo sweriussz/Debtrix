@@ -38,8 +38,8 @@
 4. **Start** managing your cyberpunk finances!
 
 ```bash
-git clone https://github.com/yourusername/neo-finance.git
-cd neo-finance
+git clone https://github.com/AM18/index.git
+cd Debtrix
 # Open index.html in your browser
 ```
 
