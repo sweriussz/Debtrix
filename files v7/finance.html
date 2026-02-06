@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NEO-FINANCE // INITIALIZATION</title>
+  <style>
+    :root {
+      --bg: #040a16; --panel: rgba(10, 15, 25, 0.85);
+      --neon-blue: #00e6ff; --neon-pink: #ff4da6; --neon-purple: #9b7cff;
+      --glass: rgba(255, 255, 255, 0.05); --text: #cfe9ff;
+      --mono: 'Roboto Mono', monospace;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+    body, html { height: 100%; margin: 0; background: var(--bg); font-family: var(--mono); color: var(--text); overflow: hidden; }
+
+    /* CYBERPUNK BACKGROUND */
+    .bg-animation {
+      position: absolute; width: 100%; height: 100%; z-index: -1;
+      background: linear-gradient(180deg, #062036 0%, #040a16 100%);
+    }
+    .grid {
+      position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
+      background-image: linear-gradient(var(--glass) 1px, transparent 1px), linear-gradient(90deg, var(--glass) 1px, transparent 1px);
+      background-size: 50px 50px; transform: perspective(500px) rotateX(60deg);
+      animation: move-grid 20s linear infinite; opacity: 0.2;
+    }
+    @keyframes move-grid { to { transform: perspective(500px) rotateX(60deg) translateY(50px); } }
+
+    .launcher-container {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 100vh; padding: 20px; box-sizing: border-box;
+    }
+
+    .setup-box {
+      background: var(--panel); border: 1px solid var(--neon-blue);
+      padding: 40px; width: 450px; border-radius: 4px;
+      box-shadow: 0 0 30px rgba(0, 230, 255, 0.1); backdrop-filter: blur(10px);
+    }
+
+    h1 { margin: 0 0 30px 0; font-size: 22px; text-align: center; color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); letter-spacing: 3px; }
+
+    .input-group { margin-bottom: 20px; }
+    label { display: block; font-size: 10px; color: var(--neon-purple); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+    
+    input, select {
+      width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--glass);
+      color: #fff; padding: 12px; border-radius: 4px; font-family: var(--mono); outline: none; transition: 0.3s;
+    }
+    input:focus, select:focus { border-color: var(--neon-blue); box-shadow: 0 0 10px rgba(0,230,255,0.2); }
+
+    .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
+    
+    button {
+      padding: 15px; cursor: pointer; font-family: var(--mono); font-weight: bold;
+      text-transform: uppercase; transition: 0.3s; border: 1px solid var(--neon-blue); background: transparent; color: var(--neon-blue);
+    }
+    button.primary { background: var(--neon-blue); color: #000; border: none; }
+    button:hover { box-shadow: 0 0 20px var(--neon-blue); transform: translateY(-2px); }
+    button.primary:hover { background: #fff; }
+
+    footer { position: absolute; bottom: 20px; font-size: 10px; color: rgba(207, 233, 255, 0.4); text-align: center; width: 100%; }
+  </style>
+</head>
+<body>
+
+  <div class="bg-animation"><div class="grid"></div></div>
+
+  <div class="launcher-container">
+    <div class="setup-box">
+      <h1>SYSTEM_INIT v1.0</h1>
+      
+      <div class="input-group">
+        <label>Operator Name [cite: 71]</label>
+        <input id="nameInput" type="text" placeholder="ENTER_NAME" value="Amir">
+      </div>
+
+      <div class="input-group">
+        <label>Simulation Duration (Years) [cite: 72]</label>
+        <select id="yearsSelect">
+          <option value="5">05 Years</option>
+          <option value="10" selected>10 Years</option>
+          <option value="20">20 Years</option>
+          <option value="50">50 Years (Hardcore)</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>Regional Difficulty (Continent) [cite: 75]</label>
+        <select id="continentSelect">
+          <option value="na">North America (Easy)</option>
+          <option value="eu" selected>Europe (Standard)</option>
+          <option value="asia">Asia (Moderate)</option>
+          <option value="sa">South Asia (Hard)</option>
+          <option value="af">Africa (Extreme)</option>
+        </select>
+      </div>
+
+      <div class="btn-row">
+        <button id="startBtn" class="primary">Boot System [cite: 79]</button>
+        <button id="demoBtn">Fast Link [cite: 79]</button>
+      </div>
+    </div>
+
+    <footer>
+      NEO-FINANCE // PROTOCOL: MELANCHOLIC_CYBERPUNK // SOURCED BY AMIR [cite: 66, 139]
+    </footer>
+  </div>
+
+  <script>
+    const startBtn = document.getElementById('startBtn');
+    const demoBtn = document.getElementById('demoBtn');
+
+    // Функция запуска игры
+    function launchGame(name, years, continent) {
+        const data = { 
+            name: name, 
+            years: parseInt(years), 
+            continent: continent, 
+            turn: 0 
+        };
+        // Сохраняем данные под ключом 'gameState'
+        localStorage.setItem('gameState', JSON.stringify(data));
+        window.location.href = 'game.html';
+    }
+
+    // Обработчик кнопки BOOT SYSTEM
+    startBtn.addEventListener('click', () => {
+        const nameInput = document.getElementById('nameInput');
+        const name = nameInput.value.trim();
+
+        // Проверка имени
+        if (name.length === 0) {
+            alert("ОШИБКА: Введите имя оператора!");
+            nameInput.style.borderColor = "var(--neon-pink)";
+            return;
+        }
+        if (name.length > 15) {
+            alert("ОШИБКА: Имя слишком длинное! (Макс. 15 символов)");
+            nameInput.style.borderColor = "var(--neon-pink)";
+            return;
+        }
+
+        const years = document.getElementById('yearsSelect').value;
+        const continent = document.getElementById('continentSelect').value;
+        
+        launchGame(name, years, continent);
+    });
+
+    // Обработчик кнопки Fast Link (Демо)
+    demoBtn.addEventListener('click', () => {
+        launchGame('Guest_User', 10, 'eu');
+    });
+</script>
+</body>
+</html>
